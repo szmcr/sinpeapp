@@ -1,19 +1,23 @@
 import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "@/src/components/EditScreenInfo";
 import { Text, View } from "@/src/components/Themed";
 import RoundButton from "@/src/components/RoundButton";
-import { Image } from "react-native-svg";
 import MovementsList from "@/src/components/MovementsList";
 import { formatCurrency } from "@/src/utils/formatCurrency";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack } from "expo-router";
 
 const accountInfo = {
   balance: 36850,
 };
 
-export default function TabOneScreen() {
+export default function AccountScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+      />
       <Text style={styles.accountName}>Cuenta Colones</Text>
       <View style={styles.subContainer}>
         <Text style={styles.subtext}>Saldo disponible</Text>
@@ -27,7 +31,7 @@ export default function TabOneScreen() {
         <Text style={styles.mainBtnText}>SINPE móvil</Text>
       </View>
       <MovementsList />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -37,6 +41,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    backgroundColor: "#fff",
   },
   subContainer: {
     alignItems: "flex-start",
@@ -49,19 +54,21 @@ const styles = StyleSheet.create({
     color: "#4c51f7",
   },
   subtext: {
-    fontSize: 16,
+    fontSize: 15,
     color: "#3e3e3e",
     marginTop: 15,
   },
   btnContainer: {
     alignSelf: "center",
     marginTop: 15,
+    alignItems: "center",
   },
   mainBalance: {
     fontSize: 40,
     fontWeight: "700",
     color: "#3e3e3e",
     marginTop: 10,
+    marginBottom: 10,
   },
   mainBtnText: {
     fontSize: 16,

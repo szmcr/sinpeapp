@@ -2,20 +2,20 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { UnionBtnIcon } from "./UnionBtnIcon";
 import { Image } from "react-native-svg";
+import { Link } from "expo-router";
 
 export default function RoundButton() {
   return (
-    <>
+    <Link href="/contacts" asChild>
       <TouchableOpacity style={styles.container}>
         <UnionBtnIcon />
       </TouchableOpacity>
-    </>
+    </Link>
   );
 }
 
 const styles = {
   container: {
-    alignSelf: "center",
     marginTop: 30,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
