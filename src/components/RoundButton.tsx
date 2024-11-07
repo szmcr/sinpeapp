@@ -1,12 +1,11 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import React from "react";
 import { UnionBtnIcon } from "./UnionBtnIcon";
-import { Image } from "react-native-svg";
 import { Link } from "expo-router";
 
 export default function RoundButton() {
   return (
-    <Link href="/contacts" asChild>
+    <Link href="/sinpe/contacts" asChild>
       <TouchableOpacity style={styles.container}>
         <UnionBtnIcon />
       </TouchableOpacity>

@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Text, View } from "@/src/components/Themed";
 import RoundButton from "@/src/components/RoundButton";
 import MovementsList from "@/src/components/MovementsList";
-import { formatCurrency } from "@/src/utils/formatCurrency";
+import { formatCurrency } from "@/src/utils/formatCurrencyUtils";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
@@ -25,21 +25,19 @@ export default function AccountScreen() {
           headerShown: false,
         }}
       />
-      <ScrollView>
-        <Text style={styles.accountName}>Cuenta Colones</Text>
-        <View style={styles.subContainer}>
-          <Text style={styles.subtext}>Saldo disponible</Text>
-          <Text style={styles.mainBalance}>
-            {formatCurrency(accountInfo.balance)}
-          </Text>
-          <Text style={styles.subtext}>¿Qué querés hacer?</Text>
-        </View>
-        <View style={styles.btnContainer}>
-          <RoundButton />
-          <Text style={styles.mainBtnText}>SINPE móvil</Text>
-        </View>
-        <MovementsList />
-      </ScrollView>
+      <Text style={styles.accountName}>Cuenta Colones</Text>
+      <View style={styles.subContainer}>
+        <Text style={styles.subtext}>Saldo disponible</Text>
+        <Text style={styles.mainBalance}>
+          {formatCurrency(accountInfo.balance)}
+        </Text>
+        <Text style={styles.subtext}>¿Qué querés hacer?</Text>
+      </View>
+      <View style={styles.btnContainer}>
+        <RoundButton />
+        <Text style={styles.mainBtnText}>SINPE móvil</Text>
+      </View>
+      <MovementsList />
     </SafeAreaView>
   );
 }

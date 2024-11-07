@@ -6,7 +6,7 @@ import {
   Pressable,
 } from "react-native";
 import { formatDate } from "../utils/formatDate";
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../utils/formatCurrencyUtils";
 import { IMovementDetails } from "../types/types";
 import { Link, useNavigation } from "expo-router";
 

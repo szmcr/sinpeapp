@@ -1,7 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { CaretRightIcon } from "./CaretRightIcon";
 import { ContactType } from "../types/types";
+import { Link, useNavigation } from "expo-router";
+import ContactAvatar from "./ContactAvatar";
+import { formatPhoneNumber } from "../utils/formatPhoneNumber";
 
 interface ContactCardProps {
   contact: ContactType;
@@ -11,37 +14,41 @@ export default function ContactCard({ contact }: ContactCardProps) {
   const { firstName, lastName, phoneNumbers } = contact;
 
   return (
-    <View style={styles.contactsContainer}>
-      <Text style={styles.contactImage}>
-        {(firstName || "").substring(0, 1)}
-        {(lastName || "").substring(0, 1)}
-      </Text>
-      <View style={styles.contactDetails}>
-        <Text style={styles.contactName}>
-          {firstName} {contact.lastName}
-        </Text>
-        <Text style={styles.subText}>
-          {phoneNumbers?.[0]?.number || "Sin número"}
-        </Text>
-      </View>
-      <View style={styles.contactIcon}>
-        <CaretRightIcon />
-      </View>
-    </View>
+    <Link
+      href={{
+        pathname: "/sinpe/sendSinpe",
+        params: {
+          firstName: firstName,
+          lastName: lastName,
+          phoneNumber: phoneNumbers?.[0].number,
+        },
+      }}
+      asChild
+    >
+      <TouchableOpacity>
+        <View style={styles.contactsContainer}>
+          <ContactAvatar
+            firstName={firstName || ""}
+            lastName={lastName || "?"}
+          />
+          <View style={styles.contactDetails}>
+            <Text style={styles.contactName}>
+              {firstName} {contact.lastName}
+            </Text>
+            <Text style={styles.subText}>
+              {formatPhoneNumber(phoneNumbers?.[0]?.number) || "Sin número"}
+            </Text>
+          </View>
+          <View style={styles.contactIcon}>
+            <CaretRightIcon />
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Link>
   );
 }
 
 const styles = StyleSheet.create({
-  contactImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 25,
-    backgroundColor: "#C6C7FF",
-    color: "#3130C6",
-    textAlign: "center",
-    lineHeight: 40,
-    fontSize: 14,
-  },
   contactsContainer: {
     flexDirection: "row",
     alignItems: "center",

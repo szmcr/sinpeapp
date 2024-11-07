@@ -5,16 +5,16 @@ import { Text, View } from "@/src/components/Themed";
 
 export default function NotFoundScreen() {
   return (
-    <>
+    <View>
       <Stack.Screen options={{ title: "Oops!" }} />
       <View style={styles.container}>
-        <Text style={styles.title}>This screen doesn't exist.</Text>
+        <Text style={styles.title}>Esta pantalla no existe.</Text>
 
         <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Go to home screen!</Text>
+          <Text style={styles.linkText}>Ir a ver tu balance!</Text>
         </Link>
       </View>
-    </>
+    </View>
   );
 }
 

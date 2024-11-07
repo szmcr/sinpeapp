@@ -7,12 +7,13 @@ import {
 import { View } from "@/src/components/Themed";
 import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { SearchBarIcon } from "../components/SearchBarIcon";
 import { Stack, useNavigation } from "expo-router";
-import useContacts from "../hooks/useContacts";
-import ContactList from "../components/ContactList";
-import { ContactListItem } from "../types/types";
-import { groupContactsByLetter } from "../utils/groupContactsByLetter";
+import useContacts from "@/src/hooks/useContacts";
+import { ContactListItem } from "@/src/types/types";
+import { groupContactsByLetter } from "@/src/utils/groupContactsByLetter";
+import CommonHeader from "@/src/components/CommonHeader";
+import { SearchBarIcon } from "@/src/components/SearchBarIcon";
+import ContactList from "@/src/components/ContactList";
 
 export default function ContactSelection() {
   const { contacts } = useContacts();
@@ -20,6 +21,7 @@ export default function ContactSelection() {
     []
   );
   const [searchTerm, setSearchTerm] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     setFilteredContacts(groupContactsByLetter(contacts));
@@ -55,27 +57,7 @@ export default function ContactSelection() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          presentation: "modal",
-          headerLeft: () => {
-            const navigation = useNavigation();
-            return (
-              <Ionicons
-                name="arrow-back"
-                size={24}
-                color="#4C51F7"
-                style={{ marginLeft: 0 }}
-                onPress={() => navigation.goBack()}
-              />
-            );
-          },
-          headerTitle: "Seleccioná un contacto",
-          headerTitleAlign: "center",
-          headerTitleStyle: { color: "#4C51F7" },
-          headerShadowVisible: false,
-        }}
-      />
+      <CommonHeader title="Seleccioná un contacto" />
       <View style={styles.searchBarContainer}>
         <SearchBarIcon style={styles.searchIcon} />
         <TextInput
