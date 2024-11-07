@@ -27,6 +27,7 @@ export default function MovementDetailsScreen() {
           headerTitle: "Detalle de movimiento",
           headerTitleAlign: "center",
           headerTitleStyle: { color: "#4C51F7" },
+          headerShadowVisible: false,
         }}
       />
       <Text>MovementDetailsSection</Text>

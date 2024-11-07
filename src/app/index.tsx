@@ -1,16 +1,23 @@
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { Text, View } from "@/src/components/Themed";
 import RoundButton from "@/src/components/RoundButton";
 import MovementsList from "@/src/components/MovementsList";
 import { formatCurrency } from "@/src/utils/formatCurrency";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
-
-const accountInfo = {
-  balance: 36850,
-};
+import { useEffect, useState } from "react";
+import { AccountInfo } from "../types/types";
 
 export default function AccountScreen() {
+  const [accountInfo, setAccountInfo] = useState<AccountInfo>({ balance: 0 });
+
+  useEffect(() => {
+    /* TODO FETCH INFO DE LA CUENTA */
+    setAccountInfo({
+      balance: 100000,
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
@@ -18,19 +25,21 @@ export default function AccountScreen() {
           headerShown: false,
         }}
       />
-      <Text style={styles.accountName}>Cuenta Colones</Text>
-      <View style={styles.subContainer}>
-        <Text style={styles.subtext}>Saldo disponible</Text>
-        <Text style={styles.mainBalance}>
-          {formatCurrency(accountInfo.balance)}
-        </Text>
-        <Text style={styles.subtext}>¿Qué querés hacer?</Text>
-      </View>
-      <View style={styles.btnContainer}>
-        <RoundButton />
-        <Text style={styles.mainBtnText}>SINPE móvil</Text>
-      </View>
-      <MovementsList />
+      <ScrollView>
+        <Text style={styles.accountName}>Cuenta Colones</Text>
+        <View style={styles.subContainer}>
+          <Text style={styles.subtext}>Saldo disponible</Text>
+          <Text style={styles.mainBalance}>
+            {formatCurrency(accountInfo.balance)}
+          </Text>
+          <Text style={styles.subtext}>¿Qué querés hacer?</Text>
+        </View>
+        <View style={styles.btnContainer}>
+          <RoundButton />
+          <Text style={styles.mainBtnText}>SINPE móvil</Text>
+        </View>
+        <MovementsList />
+      </ScrollView>
     </SafeAreaView>
   );
 }
