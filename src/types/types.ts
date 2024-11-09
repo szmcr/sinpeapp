@@ -8,6 +8,8 @@ export interface IMovementDetails {
     amount: number;
     contactName: string;
     phoneNumber: string;
+    description?: string;
+    type?: string;
 }
 
 export type AccountInfo = {

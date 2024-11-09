@@ -28,7 +28,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-contacts"
+      "expo-contacts",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

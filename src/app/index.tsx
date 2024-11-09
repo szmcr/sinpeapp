@@ -7,37 +7,51 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { AccountInfo } from "../types/types";
+import WinkLogo from "../components/WinkLogo";
+
+import { useFonts } from "expo-font";
+import LoadingView from "../components/LoadingView";
 
 export default function AccountScreen() {
   const [accountInfo, setAccountInfo] = useState<AccountInfo>({ balance: 0 });
 
   useEffect(() => {
     /* TODO FETCH INFO DE LA CUENTA */
-    setAccountInfo({
-      balance: 100000,
-    });
+    setTimeout(() => {
+      setAccountInfo({
+        balance: Math.floor(Math.random() * 100000),
+      });
+    }, 5000);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
-          headerShown: false,
+          headerTitle: "",
+          headerShadowVisible: false,
+          headerLeft: () => <WinkLogo />,
         }}
       />
-      <Text style={styles.accountName}>Cuenta Colones</Text>
-      <View style={styles.subContainer}>
-        <Text style={styles.subtext}>Saldo disponible</Text>
-        <Text style={styles.mainBalance}>
-          {formatCurrency(accountInfo.balance)}
-        </Text>
-        <Text style={styles.subtext}>¿Qué querés hacer?</Text>
-      </View>
-      <View style={styles.btnContainer}>
-        <RoundButton />
-        <Text style={styles.mainBtnText}>SINPE móvil</Text>
-      </View>
-      <MovementsList />
+      {!accountInfo.balance ? (
+        <LoadingView />
+      ) : (
+        <View>
+          <Text style={styles.accountName}>Cuenta Colones</Text>
+          <View style={styles.subContainer}>
+            <Text style={styles.subtext}>Saldo disponible</Text>
+            <Text style={styles.mainBalance}>
+              {formatCurrency(accountInfo.balance)}
+            </Text>
+            <Text style={styles.subtext}>¿Qué querés hacer?</Text>
+          </View>
+          <View style={styles.btnContainer}>
+            <RoundButton />
+            <Text style={styles.mainBtnText}>SINPE móvil</Text>
+          </View>
+          <MovementsList />
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -45,7 +59,7 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
     alignItems: "flex-start",
     justifyContent: "flex-start",
     backgroundColor: "#fff",
