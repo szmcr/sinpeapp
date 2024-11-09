@@ -1,5 +1,11 @@
-import { ScrollView, StyleSheet } from "react-native";
-import { Text, View } from "@/src/components/Themed";
+import {
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
+import { Text } from "@/src/components/Themed";
 import RoundButton from "@/src/components/RoundButton";
 import MovementsList from "@/src/components/MovementsList";
 import { formatCurrency } from "@/src/utils/formatCurrencyUtils";
@@ -8,12 +14,11 @@ import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { AccountInfo } from "../types/types";
 import WinkLogo from "../components/WinkLogo";
-
-import { useFonts } from "expo-font";
 import LoadingView from "../components/LoadingView";
 
 export default function AccountScreen() {
-  const [accountInfo, setAccountInfo] = useState<AccountInfo>({ balance: 0 });
+  const [accountInfo, setAccountInfo] = useState<AccountInfo | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     /* TODO FETCH INFO DE LA CUENTA */
@@ -21,37 +26,53 @@ export default function AccountScreen() {
       setAccountInfo({
         balance: Math.floor(Math.random() * 100000),
       });
+      setRefreshing(false);
     }, 5000);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Stack.Screen
-        options={{
-          headerTitle: "",
-          headerShadowVisible: false,
-          headerLeft: () => <WinkLogo />,
-        }}
-      />
-      {!accountInfo.balance ? (
-        <LoadingView />
-      ) : (
-        <View>
-          <Text style={styles.accountName}>Cuenta Colones</Text>
-          <View style={styles.subContainer}>
-            <Text style={styles.subtext}>Saldo disponible</Text>
-            <Text style={styles.mainBalance}>
-              {formatCurrency(accountInfo.balance)}
-            </Text>
-            <Text style={styles.subtext}>¿Qué querés hacer?</Text>
+      <View style={styles.innerContainer}>
+        <Stack.Screen
+          options={{
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerLeft: () => <WinkLogo />,
+          }}
+        />
+        {!accountInfo ? (
+          <LoadingView />
+        ) : (
+          <View style={{ minWidth: "100%" }}>
+            <ScrollView
+              refreshControl={
+                <RefreshControl
+                  colors={["#4c51f7"]}
+                  progressBackgroundColor={"#fff"}
+                  refreshing={refreshing}
+                  onRefresh={() => setAccountInfo}
+                />
+              }
+              scrollEnabled={false}
+              style={{ maxHeight: "25%" }}
+            >
+              <Text style={styles.accountName}>Cuenta Colones</Text>
+              <View style={styles.subContainer}>
+                <Text style={styles.subtext}>Saldo disponible</Text>
+                <Text style={styles.mainBalance}>
+                  {formatCurrency(accountInfo.balance)}
+                </Text>
+                <Text style={styles.subtext}>¿Qué querés hacer?</Text>
+              </View>
+            </ScrollView>
+            <View style={styles.btnContainer}>
+              <RoundButton />
+              <Text style={styles.mainBtnText}>SINPE móvil</Text>
+            </View>
+            <MovementsList />
           </View>
-          <View style={styles.btnContainer}>
-            <RoundButton />
-            <Text style={styles.mainBtnText}>SINPE móvil</Text>
-          </View>
-          <MovementsList />
-        </View>
-      )}
+        )}
+      </View>
     </SafeAreaView>
   );
 }
@@ -59,10 +80,13 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    width: "100%",
+  },
+  innerContainer: {
     paddingHorizontal: 20,
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    backgroundColor: "#fff",
   },
   subContainer: {
     alignItems: "flex-start",
@@ -80,9 +104,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   btnContainer: {
-    alignSelf: "center",
-    marginTop: 15,
+    marginTop: 10,
+    marginBottom: 20,
     alignItems: "center",
+    textAlign: "center",
+    alignSelf: "stretch",
   },
   mainBalance: {
     fontSize: 40,

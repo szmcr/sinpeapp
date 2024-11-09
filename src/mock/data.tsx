@@ -9,6 +9,8 @@ export const mockMovements = [
     amount: 10000,
     date: "2024-11-06 10:00:00",
     phoneNumber: "8888-8888",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 2,
@@ -16,6 +18,8 @@ export const mockMovements = [
     amount: 5000,
     date: "2021-09-02 10:00:00",
     phoneNumber: "7777-7777",
+    description: "Pago de alquiler",
+    type: "SINPE móvil",
   },
   {
     id: 3,
@@ -23,6 +27,8 @@ export const mockMovements = [
     amount: 8000,
     date: "2021-09-03 10:00:00",
     phoneNumber: "6666-6666",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 4,
@@ -30,6 +36,8 @@ export const mockMovements = [
     amount: 2000,
     date: "2021-09-04 10:00:00",
     phoneNumber: "5555-5555",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 5,
@@ -37,6 +45,8 @@ export const mockMovements = [
     amount: 15000,
     date: "2021-09-05 10:00:00",
     phoneNumber: "4444-4444",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 6,
@@ -44,6 +54,8 @@ export const mockMovements = [
     amount: 3000,
     date: "2021-09-06 10:00:00",
     phoneNumber: "3333-3333",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 7,
@@ -51,6 +63,8 @@ export const mockMovements = [
     amount: 7000,
     date: "2021-09-07 10:00:00",
     phoneNumber: "2222-2222",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 8,
@@ -58,6 +72,8 @@ export const mockMovements = [
     amount: 4000,
     date: "2021-09-08 10:00:00",
     phoneNumber: "1111-1111",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 9,
@@ -65,6 +81,8 @@ export const mockMovements = [
     amount: 6000,
     date: "2021-09-09 10:00:00",
     phoneNumber: "0000-0000",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
   {
     id: 10,
@@ -72,5 +90,7 @@ export const mockMovements = [
     amount: 9000,
     date: "2021-09-10 10:00:00",
     phoneNumber: "9999-9999",
+    description: "Pago de servicios",
+    type: "SINPE móvil",
   },
 ];

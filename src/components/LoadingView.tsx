@@ -9,6 +9,7 @@ export default function LoadingView() {
         justifyContent: "center",
         alignContent: "center",
         height: "100%",
+        width: "100%",
       }}
     >
       <ActivityIndicator size="large" color="#4C51F7" />

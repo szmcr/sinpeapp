@@ -23,3 +23,20 @@ export const formatDate = (date: Date): string => {
     )} ${date.toLocaleTimeString("es-CR", timeOptions)}`;
   }
 };
+
+export const formatSinpeDate = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  const month = date.toLocaleString("es-ES", { month: "long" });
+  const year = date.getFullYear();
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const period = hours >= 12 ? "pm" : "am";
+  hours = hours % 12 || 12;
+
+  return `${day} de ${capitalize(month)} ${year}, ${hours}:${minutes} ${period}`;
+};
+
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);

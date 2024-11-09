@@ -8,6 +8,7 @@ import ContactAvatar from "../components/ContactAvatar";
 import { mockMovements } from "../mock/data";
 import LoadingView from "../components/LoadingView";
 import { formatCurrency } from "../utils/formatCurrencyUtils";
+import { formatSinpeDate } from "../utils/formatDateUtils";
 
 export default function MovementDetailsScreen() {
   const { movementid } = useLocalSearchParams();
@@ -60,6 +61,16 @@ export default function MovementDetailsScreen() {
               {formatCurrency(movement.amount)}
             </Text>
           </View>
+          <View>
+            <Text style={styles.subTitle}>Fecha</Text>
+            <Text style={styles.detailsText}>
+              {formatSinpeDate(movement.date)}
+            </Text>
+            <Text style={styles.subTitle}>Descripción</Text>
+            <Text style={styles.detailsText}>{movement.description}</Text>
+            <Text style={styles.subTitle}>Tipo de movimiento</Text>
+            <Text style={styles.detailsText}>{movement.type}</Text>
+          </View>
         </>
       )}
     </View>
@@ -94,6 +105,18 @@ const styles = StyleSheet.create({
   amountText: {
     fontSize: 27,
     fontWeight: "bold",
+    color: "#3e3e3e",
+    marginTop: 5,
+  },
+  subTitle: {
+    fontSize: 15,
+    fontWeight: "300",
+    color: "#787878",
+    marginTop: 40,
+  },
+  detailsText: {
+    fontSize: 17,
+    fontWeight: "400",
     color: "#3e3e3e",
     marginTop: 5,
   },

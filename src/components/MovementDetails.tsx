@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { formatDate } from "../utils/formatDate";
+
 import { formatCurrency } from "../utils/formatCurrencyUtils";
 import { IMovementDetails } from "../types/types";
-import { Link, useNavigation } from "expo-router";
+import { Link } from "expo-router";
+import { formatDate } from "../utils/formatDateUtils";
 
 interface MovementDetailsProps {
   item: IMovementDetails;

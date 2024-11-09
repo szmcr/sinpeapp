@@ -24,7 +24,7 @@ interface SendSinpeFormErrors {
 
 export default function SendSinpe() {
   const { firstName, lastName, phoneNumber } = useLocalSearchParams();
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<string>("30,000.00");
   const [detail, setDetail] = useState("SINPE Móvil");
   const [errors, setErrors] = useState<SendSinpeFormErrors>({});
   const [isFormValid, setIsFormValid] = useState(false);

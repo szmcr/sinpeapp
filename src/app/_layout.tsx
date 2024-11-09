@@ -12,6 +12,7 @@ import "react-native-reanimated";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "../components/useColorScheme.web";
+import { View } from "../components/Themed";
 
 export { ErrorBoundary } from "expo-router";
 
