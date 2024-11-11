@@ -10,9 +10,9 @@ export const useFetch = (endpoint: string) => {
 
     const fetch = async (endpoint: string) => {
         try {
-            const rest = await axios.get(`${API_URL}/${endpoint}`);
-            if (rest.status == 200) {
-                setData(rest.data);
+            const res = await axios.get(`${API_URL}/${endpoint}`);
+            if (res.status == 200) {
+                setData(res.data);
             }
         } catch (err) {
             console.error(err);
