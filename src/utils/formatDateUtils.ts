@@ -9,18 +9,20 @@ export const formatDate = (date: Date): string => {
     hour12: true,
   };
 
+  let time = date.toLocaleTimeString("es-CR", timeOptions);
+
+
+  const newTime = time.replace("", "").replace("a. m.", "a.m").replace("p. m.", "p. m.");
   if (isToday) {
-    return `Hoy ${date.toLocaleTimeString("es-CR", timeOptions)}`;
+    return `Hoy ${newTime}`;
   } else {
     const dateOptions: Intl.DateTimeFormatOptions = {
       day: "2-digit",
       month: "2-digit",
       year: "2-digit",
     };
-    return `${date.toLocaleDateString(
-      "es-CR",
-      dateOptions
-    )} ${date.toLocaleTimeString("es-CR", timeOptions)}`;
+    const formattedDate = date.toLocaleDateString("es-CR", dateOptions);
+    return `${formattedDate} ${newTime}`;
   }
 };
 

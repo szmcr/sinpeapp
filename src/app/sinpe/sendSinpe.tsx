@@ -96,7 +96,7 @@ export default function SendSinpe() {
         console.error(err);
       })
       .finally(() => {
-        router.replace("/");
+        router.push("/");
       });
   };
 
