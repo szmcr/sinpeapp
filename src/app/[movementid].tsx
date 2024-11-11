@@ -9,25 +9,17 @@ import { mockMovements } from "../mock/data";
 import LoadingView from "../components/LoadingView";
 import { formatCurrency } from "../utils/formatCurrencyUtils";
 import { formatSinpeDate } from "../utils/formatDateUtils";
+import { useFetch } from "../hooks/useFetch";
 
 export default function MovementDetailsScreen() {
   const { movementid } = useLocalSearchParams();
-  const [movement, setMovement] = useState<IMovementDetails>();
+  const {
+    data: movement,
+    refreshing,
+    fetch,
+  } = useFetch(`/movements/${movementid}`);
 
-  useEffect(() => {
-    /* TODO Fetch DATA */
-
-    const tempMovement = mockMovements.find((m) => m.id === Number(movementid));
-
-    if (!tempMovement) {
-      console.error("Movement not found");
-      return;
-    }
-
-    setTimeout(() => {
-      setMovement(tempMovement);
-    }, 3000);
-  }, []);
+  useEffect(() => {}, []);
 
   const separateName = (
     name: string

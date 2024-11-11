@@ -4,7 +4,7 @@ export const accountInfo = {
 
 export const mockMovements = [
   {
-    id: 1,
+    id: "1",
     contactName: "Juan Pérez",
     amount: 10000,
     date: "2024-11-06 10:00:00",

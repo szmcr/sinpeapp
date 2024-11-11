@@ -15,20 +15,12 @@ import { useEffect, useState } from "react";
 import { AccountInfo } from "../types/types";
 import WinkLogo from "../components/WinkLogo";
 import LoadingView from "../components/LoadingView";
+import axios from "axios";
+import { API_URL } from "../constants/API";
+import { useFetch } from "../hooks/useFetch";
 
 export default function AccountScreen() {
-  const [accountInfo, setAccountInfo] = useState<AccountInfo | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
-
-  useEffect(() => {
-    /* TODO FETCH INFO DE LA CUENTA */
-    setTimeout(() => {
-      setAccountInfo({
-        balance: Math.floor(Math.random() * 100000),
-      });
-      setRefreshing(false);
-    }, 5000);
-  }, []);
+  const { data: accountInfo, refreshing, fetch } = useFetch(`/account-balance`);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,7 +42,7 @@ export default function AccountScreen() {
                   colors={["#4c51f7"]}
                   progressBackgroundColor={"#fff"}
                   refreshing={refreshing}
-                  onRefresh={() => setAccountInfo}
+                  onRefresh={() => fetch("/account-balance")}
                 />
               }
               scrollEnabled={false}

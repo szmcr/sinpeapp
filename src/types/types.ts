@@ -3,7 +3,7 @@ import * as Contacts from 'expo-contacts';
 export type ContactType = Contacts.Contact;
 
 export interface IMovementDetails {
-    id: number;
+    id: string;
     date: string;
     amount: number;
     contactName: string;

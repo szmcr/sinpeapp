@@ -39,11 +39,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     marginBottom: 20,
+    flexWrap: "wrap",
   },
   simpleText: {
     fontSize: 15,
     color: "#3e3e3e",
     marginBottom: 5,
+    maxWidth: "100%",
+    flexWrap: "wrap",
   },
   transferAmount: {
     fontSize: 15,

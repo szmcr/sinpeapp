@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import CommonHeader from "@/src/components/CommonHeader";
 import {
   addThousandSeparators,
@@ -16,6 +16,8 @@ import {
   removeThousandSeparators,
 } from "@/src/utils/formatCurrencyUtils";
 import SinpeContactInfo from "@/src/components/SinpeContactInfo";
+import axios from "axios";
+import { API_URL } from "@/src/constants/API";
 
 interface SendSinpeFormErrors {
   amount?: string;
@@ -70,6 +72,30 @@ export default function SendSinpe() {
     validateForm();
   }, [amount, detail]);
 
+  const handleSendSinpe = () => {
+    if (!isFormValid) return;
+
+    const formData = {
+      amount: removeThousandSeparators(amount),
+      description: detail,
+      phoneNumber,
+      contactName: `${firstName} ${lastName}`,
+    };
+
+    axios
+      .post(`${API_URL}/movements`, formData)
+      .then((res) => {
+        if (res.status === 200) {
+          alert("Transferencia realizada con éxito");
+          router.replace("/");
+          console.log(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <CommonHeader title="Enviar dinero" />
@@ -107,6 +133,7 @@ export default function SendSinpe() {
         <TouchableOpacity
           style={[styles.confirmBtn, { opacity: isFormValid ? 1 : 0.5 }]}
           disabled={!isFormValid}
+          onPress={handleSendSinpe}
         >
           <Text style={styles.confirmBtnText}>Confirmar</Text>
         </TouchableOpacity>
