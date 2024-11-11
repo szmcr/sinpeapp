@@ -21,7 +21,6 @@ export default function ContactSelection() {
     []
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const navigation = useNavigation();
 
   useEffect(() => {
     setFilteredContacts(groupContactsByLetter(contacts));
@@ -32,16 +31,16 @@ export default function ContactSelection() {
       setFilteredContacts(groupContactsByLetter(contacts));
       return;
     }
+
+    const searchLower = searchTerm.toLowerCase().trim();
+
     const filtered = contacts.filter((contact) => {
-      const firstName = contact.firstName || "";
-      const lastName = contact.lastName || "";
-      const name = `${firstName} ${lastName}`.toLowerCase();
+      const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
       const phoneNumber =
         contact.phoneNumbers?.[0]?.number?.toString().replace(/\D/g, "") || "";
 
       return (
-        contact.name.includes(searchTerm.toLowerCase()) ||
-        phoneNumber.includes(searchTerm.replace(/\D/g, ""))
+        fullName.includes(searchLower) || phoneNumber.includes(searchLower)
       );
     });
 

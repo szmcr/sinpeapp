@@ -18,6 +18,7 @@ import {
 import SinpeContactInfo from "@/src/components/SinpeContactInfo";
 import axios from "axios";
 import { API_URL } from "@/src/constants/API";
+import LoadingView from "@/src/components/LoadingView";
 
 interface SendSinpeFormErrors {
   amount?: string;
@@ -30,6 +31,7 @@ export default function SendSinpe() {
   const [detail, setDetail] = useState("SINPE Móvil");
   const [errors, setErrors] = useState<SendSinpeFormErrors>({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (input: string) => {
     const numericInput = formatToNumeric(input);
@@ -74,7 +76,7 @@ export default function SendSinpe() {
 
   const handleSendSinpe = () => {
     if (!isFormValid) return;
-
+    setLoading(true);
     const formData = {
       amount: removeThousandSeparators(amount),
       description: detail,
@@ -87,16 +89,18 @@ export default function SendSinpe() {
       .then((res) => {
         if (res.status === 200) {
           alert("Transferencia realizada con éxito");
-          router.replace("/");
-          console.log(res.data);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        router.replace("/");
       });
   };
 
-  return (
+  return !loading ? (
     <View style={styles.container}>
       <CommonHeader title="Enviar dinero" />
       <Text style={styles.labels}>Transferir a</Text>
@@ -139,6 +143,8 @@ export default function SendSinpe() {
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>
+  ) : (
+    <LoadingView />
   );
 }
 

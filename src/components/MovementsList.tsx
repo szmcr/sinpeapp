@@ -5,18 +5,11 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import MovementDetails from "./MovementDetails";
-import { IMovementDetails } from "../types/types";
-import { mockMovements } from "../mock/data";
 import { useFetch } from "../hooks/useFetch";
 
 export default function MovementsList() {
-  const {
-    data: movements,
-    refreshing,
-    initalLoading,
-  } = useFetch(`/movements?limit=10`);
+  const { data: movements, initalLoading } = useFetch(`/movements?limit=10`);
 
   return (
     <View style={styles.container}>

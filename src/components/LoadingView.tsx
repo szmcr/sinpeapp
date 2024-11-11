@@ -10,6 +10,7 @@ export default function LoadingView() {
         alignContent: "center",
         height: "100%",
         width: "100%",
+        backgroundColor: "#fff",
       }}
     >
       <ActivityIndicator size="large" color="#4C51F7" />
